@@ -11,4 +11,4 @@ I want it can change between IDA and ghidra
 2. extend dumpscript for more details inclue ASM(in textview if tool is IDA)/pseudocode/graphs/import/export
 3. add extra glob pattern like u said
 
-this is prototype prompt to combine with prototype.idea
+this is prototype prompt to combine with prototype.idea for first request

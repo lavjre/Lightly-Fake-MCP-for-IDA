@@ -373,8 +373,4 @@ python3 main/cli.py -m samples/wallpaper -t ghidra -v 2>&1 | grep -i "output\|co
 ```
 
 ---
-
-## Licence
-
-Runner / helper scripts: MIT.  
-IDA Pro and Ghidra are subject to their own respective licences.
+##                                            0o0o0o0o0
