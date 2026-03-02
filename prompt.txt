@@ -1,0 +1,13 @@
+Let go with IDA Pro Crack and ghidra on my client
+     Cli:
+        add -h --help
+            -m [file1, file2, ...] multi files (a loop for do each not multi threading)
+            -d for dir of export
+            -t [name of disassembler]  
+            can u add some arguments(likely unix tools) for me 
+I want it can change between IDA and ghidra
+
+1. make it auto detect ida-path and ghidra-path
+2. extend dumpscript for more details inclue ASM(in textview if tool is IDA)/pseudocode/graphs/import/export
+3. add extra glob pattern like u said
+

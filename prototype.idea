@@ -1,0 +1,14 @@
+Prototpye 0.1
+single/multi bin = input -> call disassembler(ida, ghidra, cutter ...) -> dump text.view, pseudocode, import, export, graph view in text... to .text(same name as name of binary) then
+if .text of dumping too big(default >= 75MB)
+    split it into files and each max size <= 50MB
+        if split >=7 files .zip(name as name of binary)
+            if .zip >=75MB
+                split it into .zip files
+Note: basically i want output < 75MB can fit to input chat model in web likely chatgpt.com...
+Prototpye 0.2 
+I considered adding GUI for ez interactive
+
+
+Using python + C/C++ (i not sure about this gimme recommend)
+
