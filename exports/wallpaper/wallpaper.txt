@@ -1,0 +1,295 @@
+# Ghidra dump
+input_file: /D:/Documents/project/Lightly-Fake-MCP-for-IDA/bin-for-demo/wallpaper
+arch:       x86:LE:64:default
+compiler:   gcc
+func_count: 1
+java:       21
+
+[functions]
+0000000000400078  entry
+
+[strings]
+0000000000000001  u8".shstrtab"
+000000000000000B  u8".text"
+
+[imports]
+
+[exports]
+0000000000400078  entry
+
+[pseudocode]
+
+====================================================================================================
+FUNCTION : entry
+START_EA : 0x400078
+====================================================================================================
+
+    
+    /* WARNING: Control flow encountered bad instruction data */
+    /* WARNING: Removing unreachable block (ram,0x00400291) */
+    /* WARNING: Removing unreachable block (ram,0x00400302) */
+    /* WARNING: Removing unreachable block (ram,0x00400293) */
+    /* WARNING: Removing unreachable block (ram,0x00400295) */
+    /* WARNING: Removing unreachable block (ram,0x004001d9) */
+    /* WARNING: Removing unreachable block (ram,0x00400205) */
+    /* WARNING: Removing unreachable block (ram,0x004002f9) */
+    /* WARNING: Removing unreachable block (ram,0x0040025a) */
+    /* WARNING: Removing unreachable block (ram,0x004002c0) */
+    /* WARNING: Removing unreachable block (ram,0x0040025c) */
+    /* WARNING: Removing unreachable block (ram,0x00400258) */
+    /* WARNING: Removing unreachable block (ram,0x004002c9) */
+    /* WARNING: Removing unreachable block (ram,0x0040027e) */
+    /* WARNING: Restarted to delay deadcode elimination for space: ram */
+    
+    void processEntry entry(void)
+    
+    {
+      long lVar1;
+      byte bVar2;
+      ulong uVar3;
+      byte bVar4;
+      ulong uVar5;
+      code *UNRECOVERED_JUMPTABLE;
+      bool bVar6;
+      bool bVar7;
+      
+      syscall();
+      syscall();
+      uVar3 = 0x26;
+      while( true ) {
+        bVar7 = SBORROW8(uVar3,1);
+        uVar5 = uVar3 - 1;
+        if ((long)uVar5 < 0) break;
+        bVar6 = (0xf000000000400U >> ((ulong)*(byte *)(uVar3 + 0x400296) & 0x3f) & 1) != 0;
+        uVar3 = uVar5;
+        if (!bVar6) goto LAB_00400226;
+      }
+      uVar3 = 0xb6fd071e9c8a3425;
+      while( true ) {
+        uVar5 = uVar5 + 1;
+        bVar4 = (char)uVar5 * '\x04';
+        bVar2 = bVar4 & 0x3f;
+        uVar3 = uVar3 >> bVar2 | uVar3 << 0x40 - bVar2;
+        *(ulong *)((long)register0x00000020 + -8) = uVar3 & 0xffffffffffffff0f;
+        *(char *)((long)register0x00000020 + -8) = -*(char *)((long)register0x00000020 + -8);
+        if ((char)(uVar3 & 0xffffffffffffff0f) == '\0' &&
+            *(char *)((long)register0x00000020 + -8) == '\0') break;
+        bVar4 = bVar4 & 0x3f;
+        uVar3 = uVar3 << bVar4 | uVar3 >> 0x40 - bVar4;
+        uVar5 = uVar5 & 0x3fffffffffffffff;
+        register0x00000020 = (BADSPACEBASE *)((long)register0x00000020 + -8);
+      }
+      uVar3 = (ulong)(byte)(cRam0000000000400297 - 0x30);
+      bVar7 = SCARRY8(uVar5 * 4,uVar3);
+      uVar5 = uVar5 * 4 + uVar3;
+      bVar6 = false;
+      if ((0x3bb97ffd7ffd6eecU >> (uVar5 & 0x3f) & 1) != 0) {
+        lVar1 = uVar3 * 2 + 6;
+        *(undefined8 *)((long)register0x00000020 + -8) = 0x400165;
+        UNRECOVERED_JUMPTABLE = (code *)(*(long *)((long)register0x00000020 + -8) + lVar1);
+                        /* WARNING: Could not recover jumptable at 0x00400169. Too many branches */
+                        /* WARNING: Treating indirect jump as call */
+        (*UNRECOVERED_JUMPTABLE)(0,UNRECOVERED_JUMPTABLE,lVar1,uVar5 - uVar3);
+        return;
+      }
+    LAB_00400226:
+      syscall();
+      syscall();
+      out(uRam0000000000400287,0xf);
+      if (uVar5 != 0) {
+        if (bVar6) {
+          *(undefined8 *)((long)register0x00000020 + -8) = 0x4f4d4320;
+          if ((POPCOUNT(uVar5 & 0xff) & 1U) != 0) {
+                        /* WARNING: Bad instruction - Truncating control flow here */
+            halt_baddata();
+          }
+          out(uRam0000000000400288,0xf);
+                        /* WARNING: Bad instruction - Truncating control flow here */
+          halt_baddata();
+        }
+        if (!bVar7) {
+                        /* WARNING: Bad instruction - Truncating control flow here */
+          halt_baddata();
+        }
+      }
+      DAT_0000003c = DAT_0000003c + -0x4c;
+                        /* WARNING: Bad instruction - Truncating control flow here */
+      halt_baddata();
+    }
+    
+
+[pseudocode_summary]
+total:  1
+ok:     1
+failed: 0
+
+[disasm]
+
+####################################################################################################
+SEGMENT : .text
+TYPE    : CODE
+RANGE   : 0x400078 - 0x4002BC
+####################################################################################################
+
+entry:
+  0000000000400078:  MOV RAX,0x1
+  000000000040007F:  MOV RDI,0x1
+  0000000000400086:  LEA RSI,[0x40024e]
+  000000000040008E:  MOV RDX,0xf
+  0000000000400095:  SYSCALL
+  0000000000400097:  XOR RAX,RAX
+  000000000040009A:  XOR RDI,RDI
+  000000000040009D:  LEA RSI,[0x400297]
+  00000000004000A5:  MOV RDX,0x26
+  00000000004000AC:  SYSCALL
+  00000000004000AE:  LEA RBX,[0x400297]
+  00000000004000B6:  MOV RCX,0x26
+LAB_004000bd:
+  00000000004000BD:  DEC RCX
+  00000000004000C0:  JS 0x004000dd
+  00000000004000C2:  MOVZX RAX,byte ptr [RBX + RCX*0x1]
+  00000000004000C7:  MOV RDX,0xf000000000400
+  00000000004000D1:  BT RDX,RAX
+  00000000004000D5:  JNC 0x00400226
+  00000000004000DB:  JMP 0x004000bd
+LAB_004000dd:
+  00000000004000DD:  MOV RAX,-0x4902f8e16375cbdb
+  00000000004000E7:  XOR RDI,RDI
+  00000000004000EA:  MOV RSI,0x2000000000
+  00000000004000F4:  BT RSI,RDI
+  00000000004000F8:  JC 0x004001d9
+  00000000004000FE:  MOV DL,byte ptr [RBX + RDI*0x1]
+  0000000000400101:  INC RCX
+LAB_00400104:
+  0000000000400104:  SHL RCX,0x2
+  0000000000400108:  ROR RAX,CL
+  000000000040010B:  MOV RSI,RAX
+  000000000040010E:  AND SIL,0xf
+  0000000000400112:  PUSH RSI
+  0000000000400113:  NEG byte ptr [RSP]
+  0000000000400116:  OR SIL,byte ptr [RSP]
+  000000000040011A:  JZ 0x00400128
+  000000000040011C:  ROL RAX,CL
+  000000000040011F:  SHR RCX,0x2
+  0000000000400123:  INC RCX
+  0000000000400126:  JMP 0x00400104
+LAB_00400128:
+  0000000000400128:  ROL RAX,CL
+  000000000040012B:  SHR RCX,0x2
+  000000000040012F:  MOVZX RDX,DL
+  0000000000400133:  ADD RSP,0x8
+  0000000000400137:  MOV RSI,0x3bb97ffd7ffd6eec
+  0000000000400141:  SHL RCX,0x2
+  0000000000400145:  ADD DL,0xd0
+  0000000000400148:  ADD RCX,RDX
+  000000000040014B:  BT RSI,RCX
+  000000000040014F:  JNC 0x00400226
+  0000000000400155:  SUB RCX,RDX
+  0000000000400158:  LEA RDX,[0x6 + RDX*0x2]
+  0000000000400160:  CALL 0x00400165
+LAB_00400165:
+  0000000000400165:  POP RSI
+  0000000000400166:  ADD RSI,RDX
+  0000000000400169:  JMP RSI
+LAB_004001d9:
+  00000000004001D9:  MOV RBX,0x123456789abcdef
+  00000000004001E3:  XOR RAX,RBX
+  00000000004001E6:  MOV RBX,0x1111111111111111
+  00000000004001F0:  XOR RAX,RBX
+  00000000004001F3:  MOV RBX,-0x1111111111111112
+  00000000004001FD:  XOR RAX,RBX
+  0000000000400200:  TEST RAX,RAX
+  0000000000400203:  JNZ 0x00400226
+  0000000000400205:  MOV RAX,0x1
+  000000000040020C:  MOV RDI,0x1
+  0000000000400213:  LEA RSI,[0x40025e]
+  000000000040021B:  MOV RDX,0x28
+  0000000000400222:  SYSCALL
+  0000000000400224:  JMP 0x00400245
+LAB_00400226:
+  0000000000400226:  MOV RAX,0x1
+  000000000040022D:  MOV RDI,0x1
+  0000000000400234:  LEA RSI,[0x400287]
+  000000000040023C:  MOV RDX,0xf
+  0000000000400243:  SYSCALL
+LAB_00400245:
+  0000000000400245:  MOV RAX,0x3c
+  000000000040024C:  SYSCALL
+LAB_0040024e:
+  000000000040024E:  OUTSB DX,RSI
+  0000000000400250:  JZ 0x004002b7
+  0000000000400252:  JC 0x00400274
+  0000000000400254:  JO 0x004002b7
+  0000000000400256:  JNC 0x004002cb
+  0000000000400258:  JA 0x004002c9
+  000000000040025A:  JC 0x004002c0
+  000000000040025C:  OR AL,byte ptr [RAX]
+LAB_0040025e:
+  000000000040025E:  OUTSD DX,ESI
+  0000000000400260:  OUTSD DX,RSI
+  0000000000400261:  AND byte ptr FS:[RDX + 0x6f],CH
+LAB_00400274:
+  0000000000400274:  PUSH 0x4f4d4320
+  0000000000400279:  JNP 0x004002f4
+  000000000040027B:  OUTSD DX,RSI
+  000000000040027C:  JNZ 0x004002f0
+  000000000040027E:  POP RDI
+  000000000040027F:  IMUL EBP,dword ptr [RSI + 0x70],0xa7d7475
+  0000000000400286:  ADD byte ptr [RDI + 0x72],DH
+  0000000000400289:  OUTSD DX,RSI
+  000000000040028A:  OUTSB DX,RSI
+  000000000040028B:  AND byte ptr [EAX + 0x61],DH
+  000000000040028F:  JNC 0x00400304
+  0000000000400291:  JA 0x00400302
+  0000000000400293:  JC 0x004002f9
+  0000000000400295:  OR AL,byte ptr [RAX]
+LAB_00400297:
+  0000000000400297:  ADD byte ptr [RAX],AL
+  0000000000400299:  ADD byte ptr [RAX],AL
+  000000000040029B:  ADD byte ptr [RAX],AL
+  000000000040029D:  ADD byte ptr [RAX],AL
+  000000000040029F:  ADD byte ptr [RAX],AL
+  00000000004002A1:  ADD byte ptr [RAX],AL
+  00000000004002A3:  ADD byte ptr [RAX],AL
+  00000000004002A5:  ADD byte ptr [RAX],AL
+  00000000004002A7:  ADD byte ptr [RAX],AL
+  00000000004002A9:  ADD byte ptr [RAX],AL
+  00000000004002AB:  ADD byte ptr [RAX],AL
+  00000000004002AD:  ADD byte ptr [RAX],AL
+  00000000004002AF:  ADD byte ptr [RAX],AL
+  00000000004002B1:  ADD byte ptr [RAX],AL
+  00000000004002B3:  ADD byte ptr [RAX],AL
+  00000000004002B5:  ADD byte ptr [RAX],AL
+LAB_004002b7:
+  00000000004002B7:  ADD byte ptr [RAX],AL
+
+####################################################################################################
+SEGMENT : .shstrtab
+TYPE    : DATA
+RANGE   : 0x0 - 0x10
+####################################################################################################
+
+
+####################################################################################################
+SEGMENT : _elfHeader
+TYPE    : DATA
+RANGE   : 0x0 - 0x3F
+####################################################################################################
+
+
+####################################################################################################
+SEGMENT : _elfProgramHeaders
+TYPE    : DATA
+RANGE   : 0x0 - 0x37
+####################################################################################################
+
+
+####################################################################################################
+SEGMENT : _elfSectionHeaders
+TYPE    : DATA
+RANGE   : 0x0 - 0xBF
+####################################################################################################
+
+
+[callgraph]
+

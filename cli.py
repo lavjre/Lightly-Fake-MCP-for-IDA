@@ -204,17 +204,20 @@ def build_ghidra_command(binary: Path, out_dir: Path, args: argparse.Namespace, 
     proj_dir = proj_root / proj_name
     proj_dir.mkdir(parents=True, exist_ok=True)
 
+    # NOTE: We use -preScript instead of -analysisOptions to disable the
+    # Java-25-only analyzer. Reason: -analysisOptions "Windows Resource References.enabled=false"
+    # contains spaces. analyzeHeadless.bat forwards args via %* without quoting,
+    # so the space causes Ghidra to misparse the entire command line.
+    # A prescript that calls mgr.setAnalyzerEnabled() has no quoting issues.
+
     return [
         args.ghidra_headless,
         str(proj_dir.parent),
         proj_name,
-        "-import",
-        str(binary),
-        "-scriptPath",
-        script_dir,
-        "-postScript",
-        script_name,
-        "--",
+        "-import", str(binary),
+        "-scriptPath", script_dir,
+        "-preScript", "DisableWinResRef.java",   # disables Java-25 analyzer before analysis
+        "-postScript", script_name,
         f"out={out_dir}",
     ]
 
@@ -462,6 +465,8 @@ def run_one(binary: Path, args: argparse.Namespace) -> None:
     out_dir = Path(args.out_dir).expanduser().resolve() / binary.stem
 
     temp_proj_root: Optional[Path] = None
+    env = os.environ.copy()
+
     if args.tool == "ghidra":
         if args.ghidra_project_root:
             proj_root = Path(args.ghidra_project_root).expanduser().resolve()
@@ -470,31 +475,70 @@ def run_one(binary: Path, args: argparse.Namespace) -> None:
             temp_proj_root = Path(tempfile.mkdtemp(prefix="ghidra_proj_"))
             proj_root = temp_proj_root
         cmd = build_ghidra_command(binary, out_dir, args, proj_root)
+        env.setdefault("NOPAUSE", "1")
     else:
         cmd = build_ida_command(binary, out_dir, args)
 
     emit(f"{binary.name} -> {args.tool.upper()} @ {out_dir}", args)
-    emit(" ".join(cmd), args, level="debug")
+    if args.verbose:
+        emit("CMD: " + " ".join(str(c) for c in cmd), args, level="debug")
 
     if args.dry_run:
-        emit("Dry run; command not executed, no files will be written.", args, level="warn")
-    else:
-        ensure_output_dir(out_dir, args.overwrite)
-        stdout_path = out_dir / "stdout.log"
-        stderr_path = out_dir / "stderr.log"
-        with stdout_path.open("w", encoding="utf-8", errors="replace") as out_f, stderr_path.open(
-            "w", encoding="utf-8", errors="replace"
-        ) as err_f:
-            result = subprocess.run(
-                cmd,
-                stdout=out_f,
-                stderr=err_f,
-                check=False,
-                timeout=args.timeout,
-            )
-        if result.returncode != 0:
-            emit(f"{binary.name}: disassembler exited with {result.returncode}", args, level="error")
-            return
+        emit("Dry run; command not executed.", args, level="warn")
+        return
+
+    ensure_output_dir(out_dir, args.overwrite)
+    stdout_path = out_dir / "stdout.log"
+    result_returncode: int = 0
+
+    try:
+        if args.verbose:
+            with stdout_path.open("w", encoding="utf-8", errors="replace") as out_f:
+                proc = subprocess.Popen(
+                    cmd,
+                    stdout=subprocess.PIPE,
+                    stderr=subprocess.STDOUT,
+                    text=True, encoding="utf-8", errors="replace",
+                    env=env,
+                )
+                assert proc.stdout
+                try:
+                    for line in proc.stdout:
+                        sys.stdout.write(line)
+                        sys.stdout.flush()
+                        out_f.write(line)
+                    proc.wait(timeout=args.timeout)
+                    result_returncode = proc.returncode
+                except subprocess.TimeoutExpired:
+                    proc.kill()
+                    emit(f"{binary.name}: timed out after {args.timeout}s", args, level="error")
+                    return
+                except KeyboardInterrupt:
+                    proc.kill()
+                    raise
+        else:
+            stderr_path = out_dir / "stderr.log"
+            with stdout_path.open("w", encoding="utf-8", errors="replace") as out_f, \
+                 stderr_path.open("w", encoding="utf-8", errors="replace") as err_f:
+                try:
+                    result = subprocess.run(
+                        cmd, stdout=out_f, stderr=err_f,
+                        check=False, timeout=args.timeout, env=env,
+                    )
+                    result_returncode = result.returncode
+                except subprocess.TimeoutExpired:
+                    emit(f"{binary.name}: timed out after {args.timeout}s", args, level="error")
+                    return
+    except KeyboardInterrupt:
+        raise
+
+    if result_returncode != 0:
+        emit(f"{binary.name}: exited with code {result_returncode}", args, level="error")
+        if stdout_path.is_file():
+            lines = stdout_path.read_text(encoding="utf-8", errors="replace").splitlines()
+            for ln in lines[-30:]:
+                emit("  " + ln, args, level="error")
+        return
 
     enforce_for_patterns(out_dir, args)
 

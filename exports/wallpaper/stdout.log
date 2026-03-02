@@ -1,0 +1,169 @@
+INFO  Using log config file: jar:file:/C:/Program%20Files/Ghidra/Ghidra/Framework/Generic/lib/Generic.jar!/generic.log4j.xml (LoggingInitialization)  
+INFO  Using log file: C:\Users\Administrator\AppData\Roaming\ghidra\ghidra_12.0.1_PUBLIC\application.log (LoggingInitialization)  
+INFO  Loading user preferences: C:\Users\Administrator\AppData\Roaming\ghidra\ghidra_12.0.1_PUBLIC\preferences (Preferences)  
+INFO  Searching for classes... (ClassSearcher)  
+INFO  Class search complete (1047 ms) (ClassSearcher)  
+INFO  Initializing SSL Context (DefaultSSLContextInitializer)  
+INFO  Initializing Random Number Generator... (SecureRandomFactory)  
+INFO  Random Number Generator initialization complete: SHA1PRNG (SecureRandomFactory)  
+INFO  Trust manager disabled, cacerts have not been set (DefaultTrustManagerFactory)  
+INFO  Headless startup complete (2933 ms) (AnalyzeHeadless)  
+INFO  Class searcher loaded 58 extension points (18 false positives) (ClassSearcher)  
+INFO  HEADLESS Script Paths:
+    C:\Program Files\Ghidra\Ghidra\Debug\Debugger\ghidra_scripts
+    C:\Program Files\Ghidra\Ghidra\Features\BSim\ghidra_scripts
+    C:\Program Files\Ghidra\Ghidra\Features\PDB\ghidra_scripts
+    C:\Program Files\Ghidra\Ghidra\Features\SystemEmulation\ghidra_scripts
+    C:\Program Files\Ghidra\Ghidra\Processors\JVM\ghidra_scripts
+    C:\Program Files\Ghidra\Ghidra\Processors\PIC\ghidra_scripts
+    C:\Program Files\Ghidra\Ghidra\Features\PyGhidra\ghidra_scripts
+    C:\Program Files\Ghidra\Ghidra\Features\DecompilerDependent\ghidra_scripts
+    C:\Program Files\Ghidra\Ghidra\Features\WildcardAssembler\ghidra_scripts
+    C:\Program Files\Ghidra\Ghidra\Features\VersionTracking\ghidra_scripts
+    C:\Program Files\Ghidra\Ghidra\Processors\Atmel\ghidra_scripts
+    C:\Program Files\Ghidra\Ghidra\Features\SwiftDemangler\ghidra_scripts
+    C:\Program Files\Ghidra\Ghidra\Features\MicrosoftCodeAnalyzer\ghidra_scripts
+    C:\Program Files\Ghidra\Ghidra\Processors\DATA\ghidra_scripts
+    D:\Documents\project\Lightly-Fake-MCP-for-IDA\scripts
+    C:\Program Files\Ghidra\Ghidra\Features\Decompiler\ghidra_scripts
+    C:\Program Files\Ghidra\Ghidra\Features\BytePatterns\ghidra_scripts
+    C:\Program Files\Ghidra\Ghidra\Features\Jython\ghidra_scripts
+    C:\Program Files\Ghidra\Ghidra\Features\GnuDemangler\ghidra_scripts
+    C:\Program Files\Ghidra\Ghidra\Features\Base\ghidra_scripts
+    C:\Program Files\Ghidra\Ghidra\Processors\8051\ghidra_scripts
+    C:\Program Files\Ghidra\Ghidra\Debug\Debugger-rmi-trace\ghidra_scripts
+    C:\Program Files\Ghidra\Ghidra\Features\FileFormats\ghidra_scripts
+    C:\Program Files\Ghidra\Ghidra\Features\FunctionID\ghidra_scripts (HeadlessAnalyzer)  
+INFO  HEADLESS: execution starts (HeadlessAnalyzer)  
+INFO  Creating project: C:\Users\ADMINI~1\AppData\Local\Temp\ghidra_proj_gvzagrhd\wallpaper (HeadlessAnalyzer)  
+INFO  Creating project: C:\Users\ADMINI~1\AppData\Local\Temp\ghidra_proj_gvzagrhd\wallpaper (DefaultProject)  
+INFO  REPORT: Processing input files:  (HeadlessAnalyzer)  
+INFO       project: C:\Users\ADMINI~1\AppData\Local\Temp\ghidra_proj_gvzagrhd\wallpaper (HeadlessAnalyzer)  
+INFO  IMPORTING: file:///D:/Documents/project/Lightly-Fake-MCP-for-IDA/bin-for-demo/wallpaper (HeadlessAnalyzer)  
+INFO  Using Loader: Executable and Linking Format (ELF) (ProgramLoader)  
+INFO  Using Language/Compiler: x86:LE:64:default:gcc (ProgramLoader)  
+INFO  Using Library Search Path: [., C:\WINDOWS\SysWOW64, C:\Program Files\Java\jdk-21\bin, C:\WINDOWS\Sun\Java\bin, C:\WINDOWS\system32, C:\WINDOWS, C:\Program Files\PowerShell\7, C:\Program Files\Eclipse Adoptium\jdk-21.0.10.7-hotspot\bin, C:\Program Files\Common Files\Oracle\Java\javapath, C:\Program Files (x86)\Common Files\Oracle\Java\javapath, C:\WINDOWS\System32\Wbem, C:\WINDOWS\System32\WindowsPowerShell\v1.0\, C:\WINDOWS\System32\OpenSSH\, C:\Program Files\dotnet\, C:\Program Files\PowerShell\7\, C:\Program Files\cursor\resources\app\bin, C:\Program Files\Microsoft VS Code\bin, C:\Program Files\Git\cmd, C:\Program Files\Cloudflare\Cloudflare WARP\, C:\Program Files (x86)\cloudflared\, C:\Program Files\Docker\Docker\resources\bin, C:\Users\Administrator\AppData\Local\Microsoft\WindowsApps, C:\Users\Administrator\AppData\Local\Programs\Microsoft VS Code\bin, C:\Users\Administrator\AppData\Local\Python\bin, C:\Program Files\msys64\ucrt64\bin, C:\Users\Administrator\.local\binc:\Users\Administrator\.vscode\extensions\vscjava.vscode-java-debug-0.58.5\bundled\scripts\noConfigScriptsc:\Users\Administrator\.vscode\extensions\ms-python.debugpy-2025.18.0-win32-x64\bundled\scripts\noConfigScripts] (ProgramLoader)  
+INFO  Additional info:
+Loading file:///D:/Documents/project/Lightly-Fake-MCP-for-IDA/bin-for-demo/wallpaper?MD5=af440ff9e876c87b2612458c15ca437a...
+------------------------------------------------
+
+ (ProgramLoader)  
+INFO  IMPORTING: Loaded 0 additional files (HeadlessAnalyzer)  
+INFO  REPORT: Execute script: DisableWinResRef.java  (HeadlessAnalyzer)  
+INFO  SCRIPT: D:\Documents\project\Lightly-Fake-MCP-for-IDA\scripts\DisableWinResRef.java (HeadlessAnalyzer)  
+INFO  DisableWinResRef.java> [DisableWinResRef] Disabled 'Windows Resource References' analyzer (GhidraScript)  
+INFO  ANALYZING all memory and code: file:///D:/Documents/project/Lightly-Fake-MCP-for-IDA/bin-for-demo/wallpaper (HeadlessAnalyzer)  
+WARN  Decompiling 00400078, pcode error at 00400265: Unable to resolve constructor at 00400265 (DecompileCallback)  
+WARN  Decompiling 00400078, pcode error at 004002c0: Could not follow disassembly flow into non-existing memory at 004002c0 (DecompileCallback)  
+WARN  Decompiling 00400078, pcode error at 004002c9: Could not follow disassembly flow into non-existing memory at 004002c9 (DecompileCallback)  
+WARN  Decompiling 00400078, pcode error at 004002cb: Could not follow disassembly flow into non-existing memory at 004002cb (DecompileCallback)  
+WARN  Decompiling 00400078, pcode error at 004002bd: Could not follow disassembly flow into non-existing memory at 004002bd (DecompileCallback)  
+WARN  Decompiling 00400078, pcode error at 004002f9: Could not follow disassembly flow into non-existing memory at 004002f9 (DecompileCallback)  
+WARN  Decompiling 00400078, pcode error at 00400302: Could not follow disassembly flow into non-existing memory at 00400302 (DecompileCallback)  
+WARN  Decompiling 00400078, pcode error at 00400304: Could not follow disassembly flow into non-existing memory at 00400304 (DecompileCallback)  
+WARN  Decompiling 00400078, pcode error at 004002f0: Could not follow disassembly flow into non-existing memory at 004002f0 (DecompileCallback)  
+WARN  Decompiling 00400078, pcode error at 004002f4: Could not follow disassembly flow into non-existing memory at 004002f4 (DecompileCallback)  
+INFO  Packed database cache: C:\Users\Administrator\AppData\Local\ghidra\packed-db-cache (PackedDatabaseCache)  
+INFO  Applied data type archive: generic_clib_64 (ApplyDataArchiveAnalyzer)  
+INFO  -----------------------------------------------------
+    ASCII Strings                              0.357 secs
+    Apply Data Archives                        0.317 secs
+    Call Convention ID                         0.001 secs
+    Call-Fixup Installer                       0.001 secs
+    Create Address Tables                      0.001 secs
+    Create Function                            0.000 secs
+    Data Reference                             0.001 secs
+    Decompiler Switch Analysis                 0.408 secs
+    Demangler GNU                              0.016 secs
+    Disassemble Entry Points                   0.090 secs
+    ELF Scalar Operand References              0.006 secs
+    Embedded Media                             0.008 secs
+    External Entry References                  0.000 secs
+    Function ID                                0.090 secs
+    Function Start Pre Search                  0.008 secs
+    Function Start Search                      0.040 secs
+    Function Start Search After Code           0.000 secs
+    Function Start Search After Data           0.011 secs
+    Non-Returning Functions - Discovered       0.000 secs
+    Non-Returning Functions - Known            0.002 secs
+    Reference                                  0.001 secs
+    Shared Return Calls                        0.003 secs
+    Stack                                      0.025 secs
+    Subroutine References                      0.003 secs
+    x86 Constant Reference Analyzer            0.027 secs
+-----------------------------------------------------
+     Total Time   1 secs
+-----------------------------------------------------
+ (AutoAnalysisManager)  
+INFO  REPORT: Analysis succeeded for file: file:///D:/Documents/project/Lightly-Fake-MCP-for-IDA/bin-for-demo/wallpaper (HeadlessAnalyzer)  
+INFO  REPORT: Execute script: GhidraDump.java 'out' 'D:\Documents\project\Lightly-Fake-MCP-for-IDA\exports\wallpaper'  (HeadlessAnalyzer)  
+INFO  SCRIPT: D:\Documents\project\Lightly-Fake-MCP-for-IDA\scripts\GhidraDump.java (HeadlessAnalyzer)  
+INFO  [GhidraDump] === GhidraDump starting === (GhidraDump)  
+[GhidraDump] === GhidraDump starting ===
+INFO  [GhidraDump] Java: 21 (GhidraDump)  
+[GhidraDump] Java: 21
+INFO  [GhidraDump] Args: [out, D:\Documents\project\Lightly-Fake-MCP-for-IDA\exports\wallpaper] (GhidraDump)  
+[GhidraDump] Args: [out, D:\Documents\project\Lightly-Fake-MCP-for-IDA\exports\wallpaper]
+INFO  [GhidraDump] Program:   wallpaper (GhidraDump)  
+[GhidraDump] Program:   wallpaper
+INFO  [GhidraDump] Language:  x86:LE:64:default (GhidraDump)  
+[GhidraDump] Language:  x86:LE:64:default
+INFO  [GhidraDump] Functions: 1 (GhidraDump)  
+[GhidraDump] Functions: 1
+INFO  [GhidraDump] out=       D:\Documents\project\Lightly-Fake-MCP-for-IDA\exports\wallpaper (GhidraDump)  
+[GhidraDump] out=       D:\Documents\project\Lightly-Fake-MCP-for-IDA\exports\wallpaper
+INFO  [GhidraDump] Output: D:\Documents\project\Lightly-Fake-MCP-for-IDA\exports\wallpaper\wallpaper.txt (GhidraDump)  
+[GhidraDump] Output: D:\Documents\project\Lightly-Fake-MCP-for-IDA\exports\wallpaper\wallpaper.txt
+INFO  [GhidraDump] writeFunctions: 1 (GhidraDump)  
+[GhidraDump] writeFunctions: 1
+INFO  [GhidraDump] writeStrings: wrote=2 skipped=5 (GhidraDump)  
+[GhidraDump] writeStrings: wrote=2 skipped=5
+INFO  [GhidraDump] writeImports: 0 (GhidraDump)  
+[GhidraDump] writeImports: 0
+INFO  [GhidraDump] writeExports: 1 (GhidraDump)  
+[GhidraDump] writeExports: 1
+INFO  [GhidraDump] writePseudocode: 1/1 (GhidraDump)  
+[GhidraDump] writePseudocode: 1/1
+WARN  Decompiling 00400078, pcode error at 00400265: Unable to resolve constructor at 00400265 (DecompileCallback)  
+WARN  Decompiling 00400078, pcode error at 004002c0: Could not follow disassembly flow into non-existing memory at 004002c0 (DecompileCallback)  
+WARN  Decompiling 00400078, pcode error at 004002c9: Could not follow disassembly flow into non-existing memory at 004002c9 (DecompileCallback)  
+WARN  Decompiling 00400078, pcode error at 004002cb: Could not follow disassembly flow into non-existing memory at 004002cb (DecompileCallback)  
+WARN  Decompiling 00400078, pcode error at 004002bd: Could not follow disassembly flow into non-existing memory at 004002bd (DecompileCallback)  
+WARN  Decompiling 00400078, pcode error at 004002f9: Could not follow disassembly flow into non-existing memory at 004002f9 (DecompileCallback)  
+WARN  Decompiling 00400078, pcode error at 00400302: Could not follow disassembly flow into non-existing memory at 00400302 (DecompileCallback)  
+WARN  Decompiling 00400078, pcode error at 00400304: Could not follow disassembly flow into non-existing memory at 00400304 (DecompileCallback)  
+WARN  Decompiling 00400078, pcode error at 004002f0: Could not follow disassembly flow into non-existing memory at 004002f0 (DecompileCallback)  
+WARN  Decompiling 00400078, pcode error at 004002f4: Could not follow disassembly flow into non-existing memory at 004002f4 (DecompileCallback)  
+WARN  Decompiling 00400078, pcode error at 00400265: Unable to resolve constructor at 00400265 (DecompileCallback)  
+WARN  Decompiling 00400078, pcode error at 004002c0: Could not follow disassembly flow into non-existing memory at 004002c0 (DecompileCallback)  
+WARN  Decompiling 00400078, pcode error at 004002c9: Could not follow disassembly flow into non-existing memory at 004002c9 (DecompileCallback)  
+WARN  Decompiling 00400078, pcode error at 004002cb: Could not follow disassembly flow into non-existing memory at 004002cb (DecompileCallback)  
+WARN  Decompiling 00400078, pcode error at 004002bd: Could not follow disassembly flow into non-existing memory at 004002bd (DecompileCallback)  
+WARN  Decompiling 00400078, pcode error at 004002f9: Could not follow disassembly flow into non-existing memory at 004002f9 (DecompileCallback)  
+WARN  Decompiling 00400078, pcode error at 00400302: Could not follow disassembly flow into non-existing memory at 00400302 (DecompileCallback)  
+WARN  Decompiling 00400078, pcode error at 00400304: Could not follow disassembly flow into non-existing memory at 00400304 (DecompileCallback)  
+WARN  Decompiling 00400078, pcode error at 004002f0: Could not follow disassembly flow into non-existing memory at 004002f0 (DecompileCallback)  
+WARN  Decompiling 00400078, pcode error at 004002f4: Could not follow disassembly flow into non-existing memory at 004002f4 (DecompileCallback)  
+INFO  [GhidraDump] writePseudocode: ok=1 fail=0 (GhidraDump)  
+[GhidraDump] writePseudocode: ok=1 fail=0
+INFO  [GhidraDump] writeDisasm: block 1/5: .text (GhidraDump)  
+[GhidraDump] writeDisasm: block 1/5: .text
+INFO  [GhidraDump] writeDisasm: block 2/5: .shstrtab (GhidraDump)  
+[GhidraDump] writeDisasm: block 2/5: .shstrtab
+INFO  [GhidraDump] writeDisasm: block 3/5: _elfHeader (GhidraDump)  
+[GhidraDump] writeDisasm: block 3/5: _elfHeader
+INFO  [GhidraDump] writeDisasm: block 4/5: _elfProgramHeaders (GhidraDump)  
+[GhidraDump] writeDisasm: block 4/5: _elfProgramHeaders
+INFO  [GhidraDump] writeDisasm: block 5/5: _elfSectionHeaders (GhidraDump)  
+[GhidraDump] writeDisasm: block 5/5: _elfSectionHeaders
+INFO  [GhidraDump] writeDisasm: 117 instructions (GhidraDump)  
+[GhidraDump] writeDisasm: 117 instructions
+INFO  [GhidraDump] writeCallgraph: edges=0 (GhidraDump)  
+[GhidraDump] writeCallgraph: edges=0
+INFO  [GhidraDump] === GhidraDump COMPLETE: D:\Documents\project\Lightly-Fake-MCP-for-IDA\exports\wallpaper\wallpaper.txt === (GhidraDump)  
+[GhidraDump] === GhidraDump COMPLETE: D:\Documents\project\Lightly-Fake-MCP-for-IDA\exports\wallpaper\wallpaper.txt ===
+INFO  ANALYZING changes made by post scripts: file:///D:/Documents/project/Lightly-Fake-MCP-for-IDA/bin-for-demo/wallpaper (HeadlessAnalyzer)  
+INFO  REPORT: Post-analysis succeeded for file: file:///D:/Documents/project/Lightly-Fake-MCP-for-IDA/bin-for-demo/wallpaper (HeadlessAnalyzer)  
+INFO  /wallpaper: file created (Lavjre) (LocalFileSystem)  
+INFO  REPORT: Save succeeded for: /wallpaper (wallpaper:/wallpaper) (HeadlessAnalyzer)  
+INFO  REPORT: Import succeeded (HeadlessAnalyzer)  
