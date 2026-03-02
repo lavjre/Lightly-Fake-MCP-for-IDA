@@ -48,11 +48,17 @@ import idautils
 # ---------------------------------------------------------------------------
 
 def parse_out_dir(argv) -> Path:
+    import os
+
+    env_out = os.environ.get("IDA_DUMP_OUT_DIR")
+    if env_out:
+        return Path(env_out)
+
     for i, arg in enumerate(argv):
         if arg.startswith("--out="):
-            return Path(arg.split("=", 1)[1])
+            return Path(arg.split("=", 1)[1].strip().strip('"'))
         if arg == "--out" and i + 1 < len(argv):
-            return Path(argv[i + 1])
+            return Path(argv[i + 1].strip().strip('"'))
     return Path.cwd() / "ida_dump"
 
 

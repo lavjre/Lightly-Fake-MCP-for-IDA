@@ -1,5 +1,5 @@
 # Ghidra dump
-input_file: /D:/Documents/project/Lightly-Fake-MCP-for-IDA/bin-for-demo/wallpaper
+input_file: /D:/Documents/project/Lightly-Fake-MCP-for-IDA/samples/wallpaper
 arch:       x86:LE:64:default
 compiler:   gcc
 func_count: 1

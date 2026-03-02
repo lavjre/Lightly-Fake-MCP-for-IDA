@@ -2424,21 +2424,22 @@ START_EA : 0x140004790
       char v1; // al
       char v2; // di
       char v3; // al
-      __int64 v4; // rcx
-      __int64 v5; // rcx
-      void (__fastcall **v6)(_QWORD, __int64); // rbx
-      char v7; // al
+      _QWORD *v4; // rax
+      void (__fastcall **v5)(_QWORD, __int64); // rbx
+      char v6; // al
+      _tls_callback_type *v7; // rax
       _tls_callback_type *v8; // rbx
       char v9; // al
       unsigned __int16 v10; // ax
       int v11; // ebx
       CHAR *wide_winmain_command_line; // rax
-      char v13; // al
+      __int64 v13; // rcx
+      char v14; // al
     
-      _scrt_initialize_crt();
+      _scrt_initialize_crt(1);
       if ( !v1 )
       {
-        sub_140004C80();
+        sub_140004C80(7u);
         goto LABEL_18;
       }
       v2 = 0;
@@ -2447,7 +2448,7 @@ START_EA : 0x140004790
       if ( dword_140008810 == 1 )
       {
     LABEL_18:
-        sub_140004C80();
+        sub_140004C80(7u);
         goto LABEL_19;
       }
       if ( dword_140008810 )
@@ -2462,18 +2463,20 @@ START_EA : 0x140004790
         initterm((_PVFV *)&qword_140006450, (_PVFV *)&qword_140006460);
         dword_140008810 = 2;
       }
-      _scrt_release_startup_lock();
-      v6 = (void (__fastcall **)(_QWORD, __int64))sub_140004C64(v4);
-      if ( *v6 )
+      _scrt_release_startup_lock(v0);
+      v4 = sub_140004C64();
+      v5 = (void (__fastcall **)(_QWORD, __int64))v4;
+      if ( *v4 )
       {
-        _scrt_is_nonwritable_in_current_image();
-        if ( v7 )
-          (*v6)(0, 2);
+        _scrt_is_nonwritable_in_current_image((__int64)v4);
+        if ( v6 )
+          (*v5)(0, 2);
       }
-      v8 = (_tls_callback_type *)sub_140004C6C(v5);
-      if ( *v8 )
+      v7 = (_tls_callback_type *)sub_140004C6C();
+      v8 = v7;
+      if ( *v7 )
       {
-        _scrt_is_nonwritable_in_current_image();
+        _scrt_is_nonwritable_in_current_image((__int64)v7);
         if ( v9 )
           register_thread_local_exe_atexit_callback(*v8);
       }
@@ -2482,12 +2485,13 @@ START_EA : 0x140004790
       wide_winmain_command_line = (CHAR *)get_wide_winmain_command_line();
       v0 = WinMain((HINSTANCE)0x140000000LL, 0, wide_winmain_command_line, v11);
       sub_140004E10();
-      if ( !v13 )
+      if ( !v14 )
     LABEL_19:
         exit(v0);
       if ( !v2 )
         cexit();
-      _scrt_uninitialize_crt();
+      LOBYTE(v13) = 1;
+      _scrt_uninitialize_crt(v13, 0);
     }
 
 ====================================================================================================

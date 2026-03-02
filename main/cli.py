@@ -34,8 +34,8 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "-d",
         "--out-dir",
-        default="exports",
-        help="Base directory for outputs (default: exports).",
+        default="runs",
+        help="Base directory for outputs (default: runs).",
     )
     parser.add_argument(
         "-t",
@@ -182,11 +182,43 @@ def ensure_output_dir(base: Path, overwrite: bool) -> None:
         base.mkdir(parents=True, exist_ok=True)
 
 
-def build_ida_command(binary: Path, out_dir: Path, args: argparse.Namespace) -> List[str]:
+def resolve_run_paths(binary: Path, args: argparse.Namespace) -> tuple[Path, Path]:
+    root = Path(args.out_dir).expanduser().resolve()
+    logs_dir = root / "logs"
+    dump_dir = root / ("ida_dump" if args.tool == "ida" else "ghidra_dump")
+    return dump_dir, logs_dir
+
+
+def clear_previous_outputs(binary: Path, dump_dir: Path, log_dir: Path, args: argparse.Namespace) -> None:
+    if not args.overwrite:
+        return
+
+    stem = binary.stem
+    dump_patterns = [
+        f"{stem}.txt",
+        f"{stem}.txt.part*",
+        f"{stem}.zip",
+        f"{stem}.zip.part*",
+    ]
+    log_patterns = [
+        f"{stem}_{args.tool}_stdout.log",
+        f"{stem}_{args.tool}_stderr.log",
+        f"{stem}_{args.tool}_run.log",
+    ]
+
+    for pattern in dump_patterns:
+        for path in dump_dir.glob(pattern):
+            path.unlink(missing_ok=True)
+    for pattern in log_patterns:
+        for path in log_dir.glob(pattern):
+            path.unlink(missing_ok=True)
+
+
+def build_ida_command(binary: Path, out_dir: Path, log_dir: Path, args: argparse.Namespace) -> List[str]:
     script_path = Path(args.ida_script).expanduser().resolve()
-    log_path = out_dir / "ida_run.log"
+    log_path = log_dir / f"{binary.stem}_ida_run.log"
     # IDA expects script args inline with -S.
-    script_arg = f"{script_path} --out \"{out_dir}\""
+    script_arg = f"{script_path} --out={out_dir}"
     return [
         args.ida_path,
         "-A",
@@ -462,7 +494,10 @@ def detect_ghidra_headless(args: argparse.Namespace) -> str:
 
 
 def run_one(binary: Path, args: argparse.Namespace) -> None:
-    out_dir = Path(args.out_dir).expanduser().resolve() / binary.stem
+    out_dir, log_dir = resolve_run_paths(binary, args)
+    ensure_output_dir(out_dir, overwrite=False)
+    ensure_output_dir(log_dir, overwrite=False)
+    clear_previous_outputs(binary, out_dir, log_dir, args)
 
     temp_proj_root: Optional[Path] = None
     env = os.environ.copy()
@@ -477,7 +512,8 @@ def run_one(binary: Path, args: argparse.Namespace) -> None:
         cmd = build_ghidra_command(binary, out_dir, args, proj_root)
         env.setdefault("NOPAUSE", "1")
     else:
-        cmd = build_ida_command(binary, out_dir, args)
+        env["IDA_DUMP_OUT_DIR"] = str(out_dir)
+        cmd = build_ida_command(binary, out_dir, log_dir, args)
 
     emit(f"{binary.name} -> {args.tool.upper()} @ {out_dir}", args)
     if args.verbose:
@@ -488,7 +524,7 @@ def run_one(binary: Path, args: argparse.Namespace) -> None:
         return
 
     ensure_output_dir(out_dir, args.overwrite)
-    stdout_path = out_dir / "stdout.log"
+    stdout_path = log_dir / f"{binary.stem}_{args.tool}_stdout.log"
     result_returncode: int = 0
 
     try:
@@ -517,7 +553,7 @@ def run_one(binary: Path, args: argparse.Namespace) -> None:
                     proc.kill()
                     raise
         else:
-            stderr_path = out_dir / "stderr.log"
+            stderr_path = log_dir / f"{binary.stem}_{args.tool}_stderr.log"
             with stdout_path.open("w", encoding="utf-8", errors="replace") as out_f, \
                  stderr_path.open("w", encoding="utf-8", errors="replace") as err_f:
                 try:
@@ -551,6 +587,9 @@ def main() -> None:
     binaries = collect_binaries(args)
     out_base = Path(args.out_dir).expanduser().resolve()
     out_base.mkdir(parents=True, exist_ok=True)
+    (out_base / "logs").mkdir(parents=True, exist_ok=True)
+    (out_base / "ida_dump").mkdir(parents=True, exist_ok=True)
+    (out_base / "ghidra_dump").mkdir(parents=True, exist_ok=True)
 
     if args.tool == "ida":
         args.ida_path = detect_ida_path(args)
