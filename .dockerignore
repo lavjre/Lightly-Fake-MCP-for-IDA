@@ -1,0 +1,41 @@
+# ── Python ───────────────────────────────────────────────────────────────────
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+
+# ── Output / logs (don't bake into image) ────────────────────────────────────
+runs/
+*.log
+
+# ── IDA databases (large, not needed in image) ───────────────────────────────
+samples/*.i64
+samples/*.idb
+samples/*.id0
+samples/*.id1
+samples/*.nam
+samples/*.til
+samples/*.zip
+
+# ── Version control ──────────────────────────────────────────────────────────
+.git/
+.gitignore
+.gitattributes
+
+# ── Docs / notes (not needed at runtime) ─────────────────────────────────────
+docs/
+notes/
+
+# ── Windows IDA installer (Linux image only needs linux/) ────────────────────
+dissembler/ida_win/
+
+# ── IDE / OS ─────────────────────────────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+.DS_Store
+Thumbs.db
+
+# ── Secrets ───────────────────────────────────────────────────────────────────
+.env
+*.env.*

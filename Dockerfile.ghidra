@@ -1,0 +1,70 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# Dockerfile.ghidra  —  Ghidra-only image  (no IDA Pro required)
+#
+# Use this if you do not have an IDA Pro licence.
+# Ghidra is downloaded from GitHub at build time — no extra files needed.
+#
+# BUILD:
+#   docker build -f Dockerfile.ghidra -t lfm-ghidra .
+#
+# RUN:
+#   docker run --rm \
+#     -v $(pwd)/samples:/targets:ro \
+#     -v $(pwd)/runs:/app/runs \
+#     lfm-ghidra  -m /targets/FLRSCRNSVR.SCR  -t ghidra  -v
+# ─────────────────────────────────────────────────────────────────────────────
+
+FROM ubuntu:22.04
+
+ARG GHIDRA_VERSION=11.3
+ARG GHIDRA_DATE=20250219
+ARG GHIDRA_ZIP=""
+ARG GHIDRA_URL="https://github.com/NationalSecurityAgency/ghidra/releases/download/Ghidra_${GHIDRA_VERSION}_build/ghidra_${GHIDRA_VERSION}_PUBLIC_${GHIDRA_DATE}.zip"
+
+ENV DEBIAN_FRONTEND=noninteractive
+ENV TZ=UTC
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    python3 python3-pip \
+    openjdk-21-jdk \
+    unzip wget ca-certificates \
+    && rm -rf /var/lib/apt/lists/*
+
+ENV JAVA_HOME=/usr/lib/jvm/java-21-openjdk-amd64
+ENV PATH="$JAVA_HOME/bin:$PATH"
+
+# ── Install Ghidra ────────────────────────────────────────────────────────────
+COPY . /build_ctx/
+
+RUN if [ -n "$GHIDRA_ZIP" ] && [ -f "/build_ctx/$GHIDRA_ZIP" ]; then \
+        echo "[Ghidra] using local zip: $GHIDRA_ZIP" \
+        && cp "/build_ctx/$GHIDRA_ZIP" /tmp/ghidra.zip ; \
+    else \
+        echo "[Ghidra] downloading: $GHIDRA_URL" \
+        && wget -q --show-progress "$GHIDRA_URL" -O /tmp/ghidra.zip ; \
+    fi \
+    && unzip -q /tmp/ghidra.zip -d /opt \
+    && mv /opt/ghidra_* /opt/ghidra \
+    && chmod +x /opt/ghidra/support/analyzeHeadless \
+    && rm /tmp/ghidra.zip \
+    && echo "[Ghidra] installed at /opt/ghidra"
+
+ENV GHIDRA_INSTALL_DIR=/opt/ghidra
+ENV PATH="$GHIDRA_INSTALL_DIR/support:$PATH"
+
+# ── Application ───────────────────────────────────────────────────────────────
+WORKDIR /app
+
+RUN cp -r /build_ctx/main    /app/main    \
+    && cp -r /build_ctx/scripts /app/scripts \
+    && cp -r /build_ctx/samples /app/samples \
+    && mkdir -p /app/runs/ida_dump /app/runs/ghidra_dump /app/runs/logs \
+    && rm -rf /build_ctx
+
+RUN python3 --version && java -version && echo "[+] Ghidra image ready"
+
+ENTRYPOINT ["python3", "/app/main/cli.py",
+            "--ghidra-script",    "/app/scripts/GhidraDump.java",
+            "--ghidra-prescript", "/app/scripts/DisableWinResRef.java",
+            "--out-dir",          "/app/runs"]
+CMD ["--help"]

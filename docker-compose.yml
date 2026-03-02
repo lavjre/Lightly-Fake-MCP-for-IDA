@@ -1,0 +1,72 @@
+version: "3.9"
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Lightly-Fake-MCP-for-IDA  —  Docker Compose
+#
+# Services:
+#   analyze   full image (IDA Pro + Ghidra)
+#   ghidra    lightweight Ghidra-only image (no IDA licence needed)
+#
+# Usage:
+#   # build all images
+#   docker compose build
+#
+#   # run with Ghidra (full image)
+#   docker compose run --rm analyze -m /targets/FLRSCRNSVR.SCR -t ghidra -v
+#
+#   # run with IDA Pro
+#   docker compose run --rm analyze -m /targets/FLRSCRNSVR.SCR -t ida -v
+#
+#   # Ghidra-only image
+#   docker compose run --rm ghidra -m /targets/wallpaper -t ghidra -v
+#
+# Override target dir:
+#   TARGETS=/path/to/bins docker compose run --rm analyze -m /targets/binary -t ghidra
+# ─────────────────────────────────────────────────────────────────────────────
+
+services:
+
+  # ── Full image: IDA Pro 9.2 + Ghidra 11 ───────────────────────────────────
+  analyze:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: lfm-ida:latest
+
+    volumes:
+      # Mount binaries to analyse  (override with TARGETS env var)
+      - ${TARGETS:-./samples}:/targets:ro
+      # Dumps appear here on the host  (mirrors /app/runs/ inside container)
+      - ${RUNS:-./runs}:/app/runs
+
+    environment:
+      - NOPAUSE=1          # suppress analyzeHeadless.bat "Press any key" prompt
+      - TERM=xterm-256color
+
+    network_mode: none     # no outbound network at analysis time
+    stdin_open: false
+    tty: false
+
+    # Default: show help.  Override per `docker compose run` call:
+    #   docker compose run --rm analyze -m /targets/sample.exe -t ghidra -v
+    command: ["--help"]
+
+  # ── Ghidra-only image (no IDA required) ───────────────────────────────────
+  ghidra:
+    build:
+      context: .
+      dockerfile: Dockerfile.ghidra
+    image: lfm-ghidra:latest
+
+    volumes:
+      - ${TARGETS:-./samples}:/targets:ro
+      - ${RUNS:-./runs}:/app/runs
+
+    environment:
+      - NOPAUSE=1
+
+    network_mode: none
+    stdin_open: false
+    tty: false
+
+    command: ["--help"]
