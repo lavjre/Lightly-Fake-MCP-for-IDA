@@ -288,78 +288,169 @@ def enforce_for_patterns(base: Path, args: argparse.Namespace) -> None:
 def detect_ida_path(args: argparse.Namespace) -> str:
     candidates: List[str] = []
 
-    # User-provided
+    # 1. User-provided (highest priority)
     if args.ida_path:
         candidates.append(args.ida_path)
 
-    # Env
+    # 2. Windows registry — enumerate all Hex-Rays subkeys
+    if sys.platform == "win32":
+        try:
+            import winreg
+            reg_base = r"SOFTWARE\Hex-Rays"
+            with winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, reg_base) as hk:
+                i = 0
+                while True:
+                    try:
+                        sub = winreg.EnumKey(hk, i)
+                        with winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, reg_base + "\\" + sub) as sk:
+                            try:
+                                install_dir, _ = winreg.QueryValueEx(sk, "InstallPath")
+                                for exe in ("ida64.exe", "idat64.exe", "ida.exe", "idat.exe"):
+                                    candidates.append(str(Path(install_dir) / exe))
+                            except FileNotFoundError:
+                                pass
+                        i += 1
+                    except OSError:
+                        break
+        except Exception:
+            pass
+
+    # 3. Environment variables
     if "IDA_PATH" in os.environ:
         candidates.append(os.environ["IDA_PATH"])
+    if "IDA_HOME" in os.environ:
+        for exe in ("ida64.exe", "idat64.exe", "ida.exe", "idat.exe"):
+            candidates.append(str(Path(os.environ["IDA_HOME"]) / exe))
 
-    # PATH lookup
+    # 4. PATH lookup
     candidates.extend(["ida64", "idat64", "ida", "idat"])
 
-    # Common Windows installs
-    program_dirs = [
-        os.environ.get("ProgramFiles"),
-        os.environ.get("ProgramFiles(x86)"),
-        "C:\\Program Files",
-        "C:\\Program Files (x86)",
-    ]
-    for base in filter(None, program_dirs):
-        for exe in glob(os.path.join(base, "IDA*\\ida64.exe")):
-            candidates.append(exe)
-        for exe in glob(os.path.join(base, "IDA*\\idat64.exe")):
-            candidates.append(exe)
+    # 5. Common install dirs — scan with Path.glob (reliable on Windows)
+    if sys.platform == "win32":
+        search_roots = list(dict.fromkeys(filter(None, [
+            os.environ.get("ProgramFiles"),
+            os.environ.get("ProgramFiles(x86)"),
+            r"C:\Program Files",
+            r"C:\Program Files (x86)",
+        ])))
+        exe_names = ["ida64.exe", "idat64.exe", "ida.exe", "idat.exe"]
+        for root in search_roots:
+            rp = Path(root)
+            if not rp.exists():
+                continue
+            for subdir in rp.glob("IDA*"):
+                if subdir.is_dir():
+                    for exe in exe_names:
+                        p = subdir / exe
+                        if p.exists():
+                            candidates.append(str(p))
+            for subdir in rp.glob("Hex-Rays/IDA*"):
+                if subdir.is_dir():
+                    for exe in exe_names:
+                        p = subdir / exe
+                        if p.exists():
+                            candidates.append(str(p))
+        # Also check drive root shallowly (e.g. C:/IDA/, D:/tools/IDA/)
+        drive = Path(os.environ.get("SystemDrive", "C:") + "\\")
+        for subdir in drive.glob("IDA*"):
+            if subdir.is_dir():
+                for exe in exe_names:
+                    p = subdir / exe
+                    if p.exists():
+                        candidates.append(str(p))
+        for subdir in drive.glob("*/IDA*"):
+            if subdir.is_dir():
+                for exe in exe_names:
+                    p = subdir / exe
+                    if p.exists():
+                        candidates.append(str(p))
+    else:
+        for prefix in ("/usr/local", "/usr", str(Path.home() / ".local")):
+            for name in ("ida64", "idat64"):
+                candidates.append(str(Path(prefix) / "bin" / name))
+        for base_str in ("/opt", str(Path.home())):
+            bp = Path(base_str)
+            if bp.exists():
+                for pat in ("IDA*/ida64", "IDA*/idat64", "ida*/ida64", "ida*/idat64"):
+                    candidates.extend(str(p) for p in bp.glob(pat))
 
-    for cand in candidates:
-        if not cand:
-            continue
-        path = shutil.which(cand) if os.path.sep not in cand else cand
-        if path and Path(path).exists():
-            return str(Path(path))
+    # 6. Resolve and validate — stop at first hit; log everything for --verbose
+    tried: List[str] = []
+    for cand in dict.fromkeys(c for c in candidates if c):
+        if os.path.isabs(cand) or os.path.sep in cand:
+            tried.append(cand)
+            if Path(cand).is_file():
+                return cand
+        else:
+            tried.append(f"{cand} (via PATH)")
+            found = shutil.which(cand)
+            if found and Path(found).is_file():
+                return str(Path(found))
 
+    if args.verbose:
+        emit(
+            "IDA autodetect tried " + str(len(tried)) + " candidates:\n  " + "\n  ".join(tried) +
+            "\n  Tip: use --ida-path \"C:\\path\\to\\ida64.exe\" to specify manually.",
+            args, level="warn"
+        )
     raise SystemExit("Could not locate IDA executable. Provide --ida-path or set IDA_PATH.")
 
 
 def detect_ghidra_headless(args: argparse.Namespace) -> str:
     candidates: List[str] = []
+    tried: List[str] = []
 
-    # User-provided
+    # 1. User-provided (highest priority)
     if args.ghidra_headless:
         candidates.append(args.ghidra_headless)
 
-    # Env
+    # 2. Environment variables
     if "GHIDRA_HEADLESS" in os.environ:
         candidates.append(os.environ["GHIDRA_HEADLESS"])
     if "GHIDRA_INSTALL_DIR" in os.environ:
-        base = Path(os.environ["GHIDRA_INSTALL_DIR"])
-        candidates.append(str(base / "support" / "analyzeHeadless"))
-        candidates.append(str(base / "support" / "analyzeHeadless.bat"))
+        ghidra_base = Path(os.environ["GHIDRA_INSTALL_DIR"])
+        candidates.append(str(ghidra_base / "support" / "analyzeHeadless"))
+        candidates.append(str(ghidra_base / "support" / "analyzeHeadless.bat"))
 
-    # PATH lookup
+    # 3. PATH lookup
     candidates.append("analyzeHeadless")
 
-    # Common Windows installs
-    program_dirs = [
-        os.environ.get("ProgramFiles"),
-        os.environ.get("ProgramFiles(x86)"),
-        "C:\\Program Files",
-        "C:\\Program Files (x86)",
-    ]
-    for base in filter(None, program_dirs):
-        for exe in glob(os.path.join(base, "ghidra*\\support\\analyzeHeadless.bat")):
-            candidates.append(exe)
-        for exe in glob(os.path.join(base, "ghidra*\\support\\analyzeHeadless")):
-            candidates.append(exe)
+    # 4. Platform-specific install locations
+    if sys.platform == "win32":
+        program_dirs = list(dict.fromkeys(filter(None, [
+            os.environ.get("ProgramFiles"),
+            os.environ.get("ProgramFiles(x86)"),
+            r"C:\Program Files",
+            r"C:\Program Files (x86)",
+        ])))
+        for base in program_dirs:
+            for pat in ["ghidra*\\support\\analyzeHeadless.bat",
+                        "ghidra*\\support\\analyzeHeadless",
+                        "Ghidra*\\support\\analyzeHeadless.bat",
+                        "Ghidra*\\support\\analyzeHeadless"]:
+                candidates.extend(glob(os.path.join(base, pat)))
+    else:
+        for prefix in ("/usr/local", "/usr", str(Path.home() / ".local")):
+            candidates.append(str(Path(prefix) / "bin" / "analyzeHeadless"))
+        for base in ("/opt", str(Path.home())):
+            for pat in ("ghidra*/support/analyzeHeadless", "Ghidra*/support/analyzeHeadless"):
+                if Path(base).exists():
+                    candidates.extend(str(p) for p in Path(base).glob(pat))
 
-    for cand in candidates:
-        if not cand:
-            continue
-        path = shutil.which(cand) if os.path.sep not in cand else cand
-        if path and Path(path).exists():
-            return str(Path(path))
+    # 5. Resolve and validate — stop at first hit
+    for cand in dict.fromkeys(c for c in candidates if c):
+        if os.path.isabs(cand) or os.path.sep in cand:
+            tried.append(cand)
+            if Path(cand).is_file():
+                return cand
+        else:
+            tried.append(f"{cand} (via PATH)")
+            found = shutil.which(cand)
+            if found and Path(found).is_file():
+                return str(Path(found))
 
+    if args.verbose:
+        emit("Ghidra autodetect tried " + str(len(tried)) + " candidates:\n  " + "\n  ".join(tried), args, level="warn")
     raise SystemExit("Could not locate Ghidra analyzeHeadless. Provide --ghidra-headless or set GHIDRA_HEADLESS.")
 
 
