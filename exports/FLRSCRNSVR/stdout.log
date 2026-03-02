@@ -1,0 +1,238 @@
+INFO  Using log config file: jar:file:/C:/Program%20Files/Ghidra/Ghidra/Framework/Generic/lib/Generic.jar!/generic.log4j.xml (LoggingInitialization)  
+INFO  Using log file: C:\Users\Administrator\AppData\Roaming\ghidra\ghidra_12.0.1_PUBLIC\application.log (LoggingInitialization)  
+INFO  Loading user preferences: C:\Users\Administrator\AppData\Roaming\ghidra\ghidra_12.0.1_PUBLIC\preferences (Preferences)  
+INFO  Searching for classes... (ClassSearcher)  
+INFO  Class search complete (1043 ms) (ClassSearcher)  
+INFO  Initializing SSL Context (DefaultSSLContextInitializer)  
+INFO  Initializing Random Number Generator... (SecureRandomFactory)  
+INFO  Random Number Generator initialization complete: SHA1PRNG (SecureRandomFactory)  
+INFO  Trust manager disabled, cacerts have not been set (DefaultTrustManagerFactory)  
+INFO  Starting cache cleanup: C:\Users\Administrator\AppData\Local\ghidra\fscache2 (FileCacheMaintenanceDaemon)  
+INFO  Finished cache cleanup, estimated storage used: 0 (FileCacheMaintenanceDaemon)  
+INFO  Headless startup complete (3325 ms) (AnalyzeHeadless)  
+INFO  Class searcher loaded 58 extension points (18 false positives) (ClassSearcher)  
+INFO  HEADLESS Script Paths:
+    C:\Program Files\Ghidra\Ghidra\Debug\Debugger\ghidra_scripts
+    C:\Program Files\Ghidra\Ghidra\Features\BSim\ghidra_scripts
+    C:\Program Files\Ghidra\Ghidra\Features\PDB\ghidra_scripts
+    C:\Program Files\Ghidra\Ghidra\Features\SystemEmulation\ghidra_scripts
+    C:\Program Files\Ghidra\Ghidra\Processors\JVM\ghidra_scripts
+    C:\Program Files\Ghidra\Ghidra\Processors\PIC\ghidra_scripts
+    C:\Program Files\Ghidra\Ghidra\Features\PyGhidra\ghidra_scripts
+    C:\Program Files\Ghidra\Ghidra\Features\DecompilerDependent\ghidra_scripts
+    C:\Program Files\Ghidra\Ghidra\Features\WildcardAssembler\ghidra_scripts
+    C:\Program Files\Ghidra\Ghidra\Features\VersionTracking\ghidra_scripts
+    C:\Program Files\Ghidra\Ghidra\Processors\Atmel\ghidra_scripts
+    C:\Program Files\Ghidra\Ghidra\Features\SwiftDemangler\ghidra_scripts
+    C:\Program Files\Ghidra\Ghidra\Features\MicrosoftCodeAnalyzer\ghidra_scripts
+    C:\Program Files\Ghidra\Ghidra\Processors\DATA\ghidra_scripts
+    D:\Documents\project\Lightly-Fake-MCP-for-IDA\scripts
+    C:\Program Files\Ghidra\Ghidra\Features\Decompiler\ghidra_scripts
+    C:\Program Files\Ghidra\Ghidra\Features\BytePatterns\ghidra_scripts
+    C:\Program Files\Ghidra\Ghidra\Features\Jython\ghidra_scripts
+    C:\Program Files\Ghidra\Ghidra\Features\GnuDemangler\ghidra_scripts
+    C:\Program Files\Ghidra\Ghidra\Features\Base\ghidra_scripts
+    C:\Program Files\Ghidra\Ghidra\Processors\8051\ghidra_scripts
+    C:\Program Files\Ghidra\Ghidra\Debug\Debugger-rmi-trace\ghidra_scripts
+    C:\Program Files\Ghidra\Ghidra\Features\FileFormats\ghidra_scripts
+    C:\Program Files\Ghidra\Ghidra\Features\FunctionID\ghidra_scripts (HeadlessAnalyzer)  
+INFO  HEADLESS: execution starts (HeadlessAnalyzer)  
+INFO  Creating project: C:\Users\ADMINI~1\AppData\Local\Temp\ghidra_proj_89em2lfa\FLRSCRNSVR (HeadlessAnalyzer)  
+INFO  Creating project: C:\Users\ADMINI~1\AppData\Local\Temp\ghidra_proj_89em2lfa\FLRSCRNSVR (DefaultProject)  
+INFO  REPORT: Processing input files:  (HeadlessAnalyzer)  
+INFO       project: C:\Users\ADMINI~1\AppData\Local\Temp\ghidra_proj_89em2lfa\FLRSCRNSVR (HeadlessAnalyzer)  
+INFO  IMPORTING: file:///D:/Documents/project/Lightly-Fake-MCP-for-IDA/bin-for-demo/FLRSCRNSVR.SCR (HeadlessAnalyzer)  
+INFO  Using Loader: Portable Executable (PE) (ProgramLoader)  
+INFO  Using Language/Compiler: x86:LE:64:default:windows (ProgramLoader)  
+INFO  Using Library Search Path: [., C:\WINDOWS\SysWOW64, C:\Program Files\Java\jdk-21\bin, C:\WINDOWS\Sun\Java\bin, C:\WINDOWS\system32, C:\WINDOWS, C:\Program Files\PowerShell\7, C:\Program Files\Eclipse Adoptium\jdk-25.0.2.10-hotspot\bin, C:\Program Files\Common Files\Oracle\Java\javapath, C:\Program Files (x86)\Common Files\Oracle\Java\javapath, C:\WINDOWS\System32\Wbem, C:\WINDOWS\System32\WindowsPowerShell\v1.0\, C:\WINDOWS\System32\OpenSSH\, C:\Program Files\dotnet\, C:\Program Files\PowerShell\7\, C:\Program Files\cursor\resources\app\bin, C:\Program Files\Microsoft VS Code\bin, C:\Program Files\Git\cmd, C:\Program Files\Cloudflare\Cloudflare WARP\, C:\Program Files (x86)\cloudflared\, C:\Program Files\Docker\Docker\resources\bin, C:\Users\Administrator\AppData\Local\Microsoft\WindowsApps, C:\Users\Administrator\AppData\Local\Programs\Microsoft VS Code\bin, C:\Users\Administrator\AppData\Local\Python\bin, C:\Program Files\msys64\ucrt64\bin, c:\Users\Administrator\.vscode\extensions\vscjava.vscode-java-debug-0.58.5\bundled\scripts\noConfigScriptsc:\Users\Administrator\.vscode\extensions\ms-python.debugpy-2025.18.0-win32-x64\bundled\scripts\noConfigScripts, C:\Users\Administrator\.local\bin] (ProgramLoader)  
+WARN  Invalid or missing function at 1800be6a8 (ExportDataDirectory)  
+INFO  Additional info:
+Loading file:///D:/Documents/project/Lightly-Fake-MCP-for-IDA/bin-for-demo/FLRSCRNSVR.SCR?MD5=99bccade30b27aa0e7d19b52720da795...
+------------------------------------------------
+
+Searching 25 paths for library ADVAPI32.DLL...
+Skipping library which is the wrong architecture: file:///C:/Windows/SysWOW64/advapi32.dll
+Loading file:///C:/Windows/System32/advapi32.dll?MD5=e0778151cdd89e9fdb9f63d3c5bba4ea...
+Created exports file: C:\Users\Administrator\AppData\Roaming\ghidra\ghidra_12.0.1_PUBLIC\symbols\win64\advapi32.exports
+Library not saved to project.
+------------------------------------------------
+
+Searching 25 paths for library API-MS-WIN-CRT-CONVERT-L1-1-0.DLL...
+Loading file:///C:/Program Files/Java/jdk-21/bin/api-ms-win-crt-convert-l1-1-0.dll?MD5=4ec4790281017e616af632da1dc624e1...
+Created exports file: C:\Users\Administrator\AppData\Roaming\ghidra\ghidra_12.0.1_PUBLIC\symbols\win64\api-ms-win-crt-convert-l1-1-0.exports
+Library not saved to project.
+------------------------------------------------
+
+Searching 25 paths for library API-MS-WIN-CRT-HEAP-L1-1-0.DLL...
+Loading file:///C:/Program Files/Java/jdk-21/bin/api-ms-win-crt-heap-l1-1-0.dll?MD5=8906279245f7385b189a6b0b67df2d7c...
+Using existing exports file: C:\Users\Administrator\AppData\Roaming\ghidra\ghidra_12.0.1_PUBLIC\symbols\win64\api-ms-win-crt-heap-l1-1-0.exports
+WARNING: Existing exports file may not be an exact match.
+Library not saved to project.
+------------------------------------------------
+
+Searching 25 paths for library API-MS-WIN-CRT-LOCALE-L1-1-0.DLL...
+Loading file:///C:/Program Files/Java/jdk-21/bin/api-ms-win-crt-locale-l1-1-0.dll?MD5=dd8176e132eedea3322443046ac35ca2...
+Using existing exports file: C:\Users\Administrator\AppData\Roaming\ghidra\ghidra_12.0.1_PUBLIC\symbols\win64\api-ms-win-crt-locale-l1-1-0.exports
+WARNING: Existing exports file may not be an exact match.
+Library not saved to project.
+------------------------------------------------
+
+Searching 25 paths for library API-MS-WIN-CRT-MATH-L1-1-0.DLL...
+Loading file:///C:/Program Files/Java/jdk-21/bin/api-ms-win-crt-math-l1-1-0.dll?MD5=a6a3d6d11d623e16866f38185853facd...
+Using existing exports file: C:\Users\Administrator\AppData\Roaming\ghidra\ghidra_12.0.1_PUBLIC\symbols\win64\api-ms-win-crt-math-l1-1-0.exports
+WARNING: Existing exports file may not be an exact match.
+Library not saved to project.
+------------------------------------------------
+
+Searching 25 paths for library API-MS-WIN-CRT-RUNTIME-L1-1-0.DLL...
+Loading file:///C:/Program Files/Java/jdk-21/bin/api-ms-win-crt-runtime-l1-1-0.dll?MD5=f1a23c251fcbb7041496352ec9bcffbe...
+Using existing exports file: C:\Users\Administrator\AppData\Roaming\ghidra\ghidra_12.0.1_PUBLIC\symbols\win64\api-ms-win-crt-runtime-l1-1-0.exports
+WARNING: Existing exports file may not be an exact match.
+Library not saved to project.
+------------------------------------------------
+
+Searching 25 paths for library API-MS-WIN-CRT-STDIO-L1-1-0.DLL...
+Loading file:///C:/Program Files/Java/jdk-21/bin/api-ms-win-crt-stdio-l1-1-0.dll?MD5=55b2eb7f17f82b2096e94bca9d2db901...
+Using existing exports file: C:\Users\Administrator\AppData\Roaming\ghidra\ghidra_12.0.1_PUBLIC\symbols\win64\api-ms-win-crt-stdio-l1-1-0.exports
+WARNING: Existing exports file may not be an exact match.
+Library not saved to project.
+------------------------------------------------
+
+Searching 25 paths for library API-MS-WIN-CRT-STRING-L1-1-0.DLL...
+Loading file:///C:/Program Files/Java/jdk-21/bin/api-ms-win-crt-string-l1-1-0.dll?MD5=9b79965f06fd756a5efde11e8d373108...
+Using existing exports file: C:\Users\Administrator\AppData\Roaming\ghidra\ghidra_12.0.1_PUBLIC\symbols\win64\api-ms-win-crt-string-l1-1-0.exports
+Library not saved to project.
+------------------------------------------------
+
+Searching 25 paths for library API-MS-WIN-CRT-TIME-L1-1-0.DLL...
+Loading file:///C:/Program Files/Java/jdk-21/bin/api-ms-win-crt-time-l1-1-0.dll?MD5=1d48a3189a55b632798f0e859628b0fb...
+Created exports file: C:\Users\Administrator\AppData\Roaming\ghidra\ghidra_12.0.1_PUBLIC\symbols\win64\api-ms-win-crt-time-l1-1-0.exports
+Library not saved to project.
+------------------------------------------------
+
+Searching 25 paths for library API-MS-WIN-CRT-UTILITY-L1-1-0.DLL...
+Loading file:///C:/Program Files/Java/jdk-21/bin/api-ms-win-crt-utility-l1-1-0.dll?MD5=dbc27d384679916ba76316fb5e972ea6...
+Created exports file: C:\Users\Administrator\AppData\Roaming\ghidra\ghidra_12.0.1_PUBLIC\symbols\win64\api-ms-win-crt-utility-l1-1-0.exports
+Library not saved to project.
+------------------------------------------------
+
+Searching 25 paths for library GDI32.DLL...
+Skipping library which is the wrong architecture: file:///C:/Windows/SysWOW64/gdi32.dll
+Loading file:///C:/Windows/System32/gdi32.dll?MD5=c1a338832e8fd84ae5125a0114a99534...
+Created exports file: C:\Users\Administrator\AppData\Roaming\ghidra\ghidra_12.0.1_PUBLIC\symbols\win64\gdi32.exports
+Library not saved to project.
+------------------------------------------------
+
+Searching 25 paths for library KERNEL32.DLL...
+Skipping library which is the wrong architecture: file:///C:/Windows/SysWOW64/kernel32.dll
+Loading file:///C:/Windows/System32/kernel32.dll?MD5=8302602f5925ee9a3316e40a1d364e0e...
+Using existing exports file: C:\Users\Administrator\AppData\Roaming\ghidra\ghidra_12.0.1_PUBLIC\symbols\win64\kernel32.exports
+Library not saved to project.
+------------------------------------------------
+
+Searching 25 paths for library MSIMG32.DLL...
+Skipping library which is the wrong architecture: file:///C:/Windows/SysWOW64/msimg32.dll
+Loading file:///C:/Windows/System32/msimg32.dll?MD5=50d90d6930b84401479ea4fd98e0fa04...
+Created exports file: C:\Users\Administrator\AppData\Roaming\ghidra\ghidra_12.0.1_PUBLIC\symbols\win64\msimg32.exports
+Library not saved to project.
+------------------------------------------------
+
+Searching 25 paths for library USER32.DLL...
+Skipping library which is the wrong architecture: file:///C:/Windows/SysWOW64/user32.dll
+Loading file:///C:/Windows/System32/user32.dll?MD5=a391b8970f50628c6f900fcd9eca26ce...
+[user32.dll]: failed to create WEVTResource at 1800dda70: Failed to resolve data length for WEVTResource
+Using existing exports file: C:\Users\Administrator\AppData\Roaming\ghidra\ghidra_12.0.1_PUBLIC\symbols\win64\user32.exports
+Library not saved to project.
+------------------------------------------------
+
+Searching 25 paths for library VCRUNTIME140.DLL...
+Skipping library which is the wrong architecture: file:///C:/Windows/SysWOW64/vcruntime140.dll
+Loading file:///C:/Program Files/Java/jdk-21/bin/vcruntime140.dll?MD5=7415c1cc63a0c46983e2a32581daefee...
+Using existing exports file: C:\Users\Administrator\AppData\Roaming\ghidra\ghidra_12.0.1_PUBLIC\symbols\win64\vcruntime140.exports
+WARNING: Existing exports file may not be an exact match.
+Library not saved to project.
+------------------------------------------------
+
+Applying C:\Users\Administrator\AppData\Roaming\ghidra\ghidra_12.0.1_PUBLIC\symbols\win64\kernel32.exports
+Applying C:\Users\Administrator\AppData\Roaming\ghidra\ghidra_12.0.1_PUBLIC\symbols\win64\user32.exports
+Applying cached symbols from GDI32.DLL
+Applying cached symbols from ADVAPI32.DLL
+Applying cached symbols from MSIMG32.DLL
+Applying C:\Users\Administrator\AppData\Roaming\ghidra\ghidra_12.0.1_PUBLIC\symbols\win64\vcruntime140.exports
+Applying C:\Users\Administrator\AppData\Roaming\ghidra\ghidra_12.0.1_PUBLIC\symbols\win64\api-ms-win-crt-string-l1-1-0.exports
+Applying C:\Users\Administrator\AppData\Roaming\ghidra\ghidra_12.0.1_PUBLIC\symbols\win64\api-ms-win-crt-stdio-l1-1-0.exports
+Applying cached symbols from API-MS-WIN-CRT-UTILITY-L1-1-0.DLL
+Applying C:\Users\Administrator\AppData\Roaming\ghidra\ghidra_12.0.1_PUBLIC\symbols\win64\api-ms-win-crt-convert-l1-1-0.exports
+Applying C:\Users\Administrator\AppData\Roaming\ghidra\ghidra_12.0.1_PUBLIC\symbols\win64\api-ms-win-crt-time-l1-1-0.exports
+Applying C:\Users\Administrator\AppData\Roaming\ghidra\ghidra_12.0.1_PUBLIC\symbols\win64\api-ms-win-crt-runtime-l1-1-0.exports
+Applying C:\Users\Administrator\AppData\Roaming\ghidra\ghidra_12.0.1_PUBLIC\symbols\win64\api-ms-win-crt-math-l1-1-0.exports
+Applying C:\Users\Administrator\AppData\Roaming\ghidra\ghidra_12.0.1_PUBLIC\symbols\win64\api-ms-win-crt-locale-l1-1-0.exports
+Applying C:\Users\Administrator\AppData\Roaming\ghidra\ghidra_12.0.1_PUBLIC\symbols\win64\api-ms-win-crt-heap-l1-1-0.exports
+Linking the External Programs of 'FLRSCRNSVR.SCR' to imported libraries...
+  [KERNEL32.DLL] -> not found in project
+  [USER32.DLL] -> not found in project
+  [GDI32.DLL] -> not found in project
+  [ADVAPI32.DLL] -> not found in project
+  [MSIMG32.DLL] -> not found in project
+  [VCRUNTIME140.DLL] -> not found in project
+  [API-MS-WIN-CRT-STRING-L1-1-0.DLL] -> not found in project
+  [API-MS-WIN-CRT-STDIO-L1-1-0.DLL] -> not found in project
+  [API-MS-WIN-CRT-UTILITY-L1-1-0.DLL] -> not found in project
+  [API-MS-WIN-CRT-CONVERT-L1-1-0.DLL] -> not found in project
+  [API-MS-WIN-CRT-TIME-L1-1-0.DLL] -> not found in project
+  [API-MS-WIN-CRT-RUNTIME-L1-1-0.DLL] -> not found in project
+  [API-MS-WIN-CRT-MATH-L1-1-0.DLL] -> not found in project
+  [API-MS-WIN-CRT-LOCALE-L1-1-0.DLL] -> not found in project
+  [API-MS-WIN-CRT-HEAP-L1-1-0.DLL] -> not found in project
+------------------------------------------------
+
+ (ProgramLoader)  
+INFO  IMPORTING: Loaded 0 additional files (HeadlessAnalyzer)  
+INFO  ANALYZING all memory and code: file:///D:/Documents/project/Lightly-Fake-MCP-for-IDA/bin-for-demo/FLRSCRNSVR.SCR (HeadlessAnalyzer)  
+WARN  Ignoring leading '_' chars on no-return name '___raise_securityfailure' specified in file: C:\Program Files\Ghidra\Ghidra\Features\Base\data\PEFunctionsThatDoNotReturn (NoReturnFunctionAnalyzer)  
+WARN  Ignoring leading '_' chars on no-return name '___report_rangecheckfailure' specified in file: C:\Program Files\Ghidra\Ghidra\Features\Base\data\PEFunctionsThatDoNotReturn (NoReturnFunctionAnalyzer)  
+INFO  Skipping PDB processing: failed to locate PDB file in configured locations (PdbUniversalAnalyzer)  
+INFO  Use a script to set the PDB file location. I.e.,
+    PdbAnalyzer.setPdbFileOption(currentProgram, new File("/path/to/pdb/file.pdb")); or
+    PdbUniversalAnalyzer.setPdbFileOption(currentProgram, new File("/path/to/pdb/file.pdb"));
+Or set the symbol server search configuration using:    PdbPlugin.saveSymbolServerServiceConfig(...);
+ This must be done using a pre-script (prior to analysis). (PdbUniversalAnalyzer)  
+INFO  hit non-returning function, restarting decompiler switch analyzer later (DecompilerSwitchAnalyzer)  
+INFO  Packed database cache: C:\Users\Administrator\AppData\Local\ghidra\packed-db-cache (PackedDatabaseCache)  
+INFO  Applied data type archive: windows_vs12_64 (ApplyDataArchiveAnalyzer)  
+ERROR Abort due to Headless analyzer error: WindowsResourceReference has been compiled by a more recent version of the Java Runtime (class file version 69.0), this version of the Java Runtime only recognizes class file versions up to 65.0 (HeadlessAnalyzer) java.lang.UnsupportedClassVersionError: WindowsResourceReference has been compiled by a more recent version of the Java Runtime (class file version 69.0), this version of the Java Runtime only recognizes class file versions up to 65.0
+	at java.base/java.lang.ClassLoader.defineClass1(Native Method)
+	at java.base/java.lang.ClassLoader.defineClass(ClassLoader.java:1027)
+	at org.apache.felix.framework.BundleWiringImpl$BundleClassLoader.defineClass(BundleWiringImpl.java:2338)
+	at org.apache.felix.framework.BundleWiringImpl$BundleClassLoader.defineClassParallel(BundleWiringImpl.java:2156)
+	at org.apache.felix.framework.BundleWiringImpl$BundleClassLoader.findClass(BundleWiringImpl.java:2090)
+	at org.apache.felix.framework.BundleWiringImpl.findClassOrResourceByDelegation(BundleWiringImpl.java:1556)
+	at org.apache.felix.framework.BundleWiringImpl.access$300(BundleWiringImpl.java:79)
+	at org.apache.felix.framework.BundleWiringImpl$BundleClassLoader.loadClass(BundleWiringImpl.java:1976)
+	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:526)
+	at org.apache.felix.framework.Felix.loadBundleClass(Felix.java:2116)
+	at org.apache.felix.framework.BundleImpl.loadClass(BundleImpl.java:986)
+	at ghidra.app.script.JavaScriptProvider.loadClass(JavaScriptProvider.java:166)
+	at ghidra.app.script.JavaScriptProvider.getScriptInstance(JavaScriptProvider.java:97)
+	at ghidra.app.plugin.prototype.MicrosoftCodeAnalyzerPlugin.WindowsResourceReferenceAnalyzer.runScript(WindowsResourceReferenceAnalyzer.java:98)
+	at ghidra.app.plugin.prototype.MicrosoftCodeAnalyzerPlugin.WindowsResourceReferenceAnalyzer.added(WindowsResourceReferenceAnalyzer.java:72)
+	at ghidra.app.plugin.core.analysis.AnalysisScheduler.runAnalyzer(AnalysisScheduler.java:186)
+	at ghidra.app.plugin.core.analysis.AnalysisTask.applyTo(AnalysisTask.java:37)
+	at ghidra.app.plugin.core.analysis.AnalysisTask.applyTo(AnalysisTask.java:24)
+	at ghidra.app.plugin.core.analysis.AutoAnalysisManager$AnalysisTaskWrapper.run(AutoAnalysisManager.java:660)
+	at ghidra.app.plugin.core.analysis.AutoAnalysisManager.startAnalysis(AutoAnalysisManager.java:760)
+	at ghidra.app.plugin.core.analysis.AutoAnalysisManager.startAnalysis(AutoAnalysisManager.java:639)
+	at ghidra.app.plugin.core.analysis.AutoAnalysisManager.startAnalysis(AutoAnalysisManager.java:604)
+	at ghidra.app.util.headless.HeadlessAnalyzer.analyzeProgram(HeadlessAnalyzer.java:1045)
+	at ghidra.app.util.headless.HeadlessAnalyzer.processFileWithImport(HeadlessAnalyzer.java:1584)
+	at ghidra.app.util.headless.HeadlessAnalyzer.processWithLoader(HeadlessAnalyzer.java:1744)
+	at ghidra.app.util.headless.HeadlessAnalyzer.processWithImport(HeadlessAnalyzer.java:1685)
+	at ghidra.app.util.headless.HeadlessAnalyzer.processWithImport(HeadlessAnalyzer.java:1769)
+	at ghidra.app.util.headless.HeadlessAnalyzer.processLocal(HeadlessAnalyzer.java:462)
+	at ghidra.app.util.headless.AnalyzeHeadless.launch(AnalyzeHeadless.java:199)
+	at ghidra.GhidraLauncher.launch(GhidraLauncher.java:81)
+	at ghidra.Ghidra.main(Ghidra.java:54)
+ 
+Press any key to continue . . . 
+Terminate batch job (Y/N)? 
+Terminate batch job (Y/N)? 

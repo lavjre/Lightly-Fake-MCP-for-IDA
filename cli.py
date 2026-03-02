@@ -184,10 +184,14 @@ def ensure_output_dir(base: Path, overwrite: bool) -> None:
 
 def build_ida_command(binary: Path, out_dir: Path, args: argparse.Namespace) -> List[str]:
     script_path = Path(args.ida_script).expanduser().resolve()
+    log_path = out_dir / "ida_run.log"
+    # IDA expects script args inline with -S.
+    script_arg = f"{script_path} --out \"{out_dir}\""
     return [
         args.ida_path,
         "-A",
-        f"-S{script_path} --out \"{out_dir}\"",
+        f"-L{log_path}",
+        f"-S{script_arg}",
         str(binary),
     ]
 
@@ -322,10 +326,7 @@ def detect_ida_path(args: argparse.Namespace) -> str:
         for exe in ("ida64.exe", "idat64.exe", "ida.exe", "idat.exe"):
             candidates.append(str(Path(os.environ["IDA_HOME"]) / exe))
 
-    # 4. PATH lookup
-    candidates.extend(["ida64", "idat64", "ida", "idat"])
-
-    # 5. Common install dirs — scan with Path.glob (reliable on Windows)
+    # 4. Common install dirs — scan with Path.glob (reliable on Windows)
     if sys.platform == "win32":
         search_roots = list(dict.fromkeys(filter(None, [
             os.environ.get("ProgramFiles"),
@@ -373,6 +374,9 @@ def detect_ida_path(args: argparse.Namespace) -> str:
             if bp.exists():
                 for pat in ("IDA*/ida64", "IDA*/idat64", "ida*/ida64", "ida*/idat64"):
                     candidates.extend(str(p) for p in bp.glob(pat))
+
+    # 5. PATH lookup (lower priority than known install roots)
+    candidates.extend(["idat64", "ida64", "idat", "ida"])
 
     # 6. Resolve and validate — stop at first hit; log everything for --verbose
     tried: List[str] = []
@@ -456,7 +460,6 @@ def detect_ghidra_headless(args: argparse.Namespace) -> str:
 
 def run_one(binary: Path, args: argparse.Namespace) -> None:
     out_dir = Path(args.out_dir).expanduser().resolve() / binary.stem
-    ensure_output_dir(out_dir, args.overwrite)
 
     temp_proj_root: Optional[Path] = None
     if args.tool == "ghidra":
@@ -474,8 +477,9 @@ def run_one(binary: Path, args: argparse.Namespace) -> None:
     emit(" ".join(cmd), args, level="debug")
 
     if args.dry_run:
-        emit("Dry run; command not executed.", args, level="warn")
+        emit("Dry run; command not executed, no files will be written.", args, level="warn")
     else:
+        ensure_output_dir(out_dir, args.overwrite)
         stdout_path = out_dir / "stdout.log"
         stderr_path = out_dir / "stderr.log"
         with stdout_path.open("w", encoding="utf-8", errors="replace") as out_f, stderr_path.open(

@@ -1,0 +1,200 @@
+# IDA dump
+input_file: D:\Documents\project\Lightly-Fake-MCP-for-IDA\bin-for-demo\wallpaper
+arch:       metapc
+bitness:    64
+func_count: 0
+ida_version:9.2
+
+[functions]
+
+[strings]
+
+[imports]
+
+[exports]
+0000000000400078  start
+
+[pseudocode]
+
+[pseudocode_summary]
+total:  0
+ok:     0
+failed: 0
+
+[disasm]
+
+####################################################################################################
+SEGMENT : .text
+TYPE    : CODE
+RANGE   : 0x400078 - 0x4002BD
+####################################################################################################
+
+start:
+  0000000000400078:  mov     rax, 1
+  000000000040007F:  mov     rdi, 1
+  0000000000400086:  lea     rsi, loc_40024E
+  000000000040008E:  mov     rdx, 0Fh
+  0000000000400095:  syscall; LINUX - sys_write
+                          ; LINUX - sys_write
+  0000000000400097:  xor     rax, rax
+  000000000040009A:  xor     rdi, rdi
+  000000000040009D:  lea     rsi, byte_400297
+  00000000004000A5:  mov     rdx, 26h ; '&'
+  00000000004000AC:  syscall; LINUX - sys_read
+                          ; LINUX - sys_read
+  00000000004000AE:  lea     rbx, byte_400297
+  00000000004000B6:  mov     rcx, 26h ; '&'
+loc_4000BD:
+  00000000004000BD:  dec     rcx
+  00000000004000C0:  js      short loc_4000DD
+  00000000004000C2:  movzx   rax, byte ptr [rbx+rcx]
+  00000000004000C7:  mov     rdx, 0F000000000400h
+  00000000004000D1:  bt      rdx, rax
+  00000000004000D5:  jnb     loc_400226
+  00000000004000DB:  jmp     short loc_4000BD
+loc_4000DD:
+  00000000004000DD:  mov     rax, 0B6FD071E9C8A3425h
+  00000000004000E7:  xor     rdi, rdi
+loc_4000EA:
+  00000000004000EA:  mov     rsi, 2000000000h
+  00000000004000F4:  bt      rsi, rdi
+  00000000004000F8:  jb      loc_4001D9
+  00000000004000FE:  mov     dl, [rbx+rdi]
+  0000000000400101:  inc     rcx
+loc_400104:
+  0000000000400104:  shl     rcx, 2
+  0000000000400108:  ror     rax, cl
+  000000000040010B:  mov     rsi, rax
+  000000000040010E:  and     sil, 0Fh
+  0000000000400112:  push    rsi
+  0000000000400113:  neg     byte ptr [rsp]
+  0000000000400116:  or      sil, [rsp]
+  000000000040011A:  jz      short loc_400128
+  000000000040011C:  rol     rax, cl
+  000000000040011F:  shr     rcx, 2
+  0000000000400123:  inc     rcx
+  0000000000400126:  jmp     short loc_400104
+loc_400128:
+  0000000000400128:  rol     rax, cl
+  000000000040012B:  shr     rcx, 2
+  000000000040012F:  movzx   rdx, dl
+  0000000000400133:  add     rsp, 8
+  0000000000400137:  mov     rsi, 3BB97FFD7FFD6EECh
+  0000000000400141:  shl     rcx, 2
+  0000000000400145:  add     dl, 0D0h
+  0000000000400148:  add     rcx, rdx
+  000000000040014B:  bt      rsi, rcx
+  000000000040014F:  jnb     loc_400226
+  0000000000400155:  sub     rcx, rdx
+  0000000000400158:  lea     rdx, ds:6[rdx*2]
+  0000000000400160:  call    $+5
+  0000000000400165:  pop     rsi
+  0000000000400166:  add     rsi, rdx
+  0000000000400169:  jmp     rsi
+  000000000040016B:  jmp     short loc_400173
+  000000000040016D:  jmp     short loc_40017A
+  000000000040016F:  jmp     short loc_400181
+  0000000000400171:  jmp     short loc_400185
+loc_400173:
+  0000000000400173:  push    0F0h
+  0000000000400178:  jmp     short loc_400187
+loc_40017A:
+  000000000040017A:  push    0FCh
+  000000000040017F:  jmp     short loc_400187
+loc_400181:
+  0000000000400181:  push    10h
+  0000000000400183:  jmp     short loc_400187
+loc_400185:
+  0000000000400185:  push    4
+loc_400187:
+  0000000000400187:  push    rax
+  0000000000400188:  add     cl, [rsp+8]
+  000000000040018C:  ror     qword ptr [rsp], cl
+  0000000000400190:  movzx   rsi, byte ptr [rsp]
+  0000000000400195:  and     byte ptr [rsp], 0F0h
+  0000000000400199:  and     rsi, 0Fh
+  000000000040019D:  neg     rcx
+  00000000004001A0:  add     rcx, 40h ; '@'
+  00000000004001A4:  ror     qword ptr [rsp], cl
+  00000000004001A8:  sub     rcx, 40h ; '@'
+  00000000004001AC:  neg     rcx
+  00000000004001AF:  sub     cl, [rsp+8]
+  00000000004001B3:  ror     qword ptr [rsp], cl
+  00000000004001B7:  or      [rsp], sil
+  00000000004001BB:  neg     rcx
+  00000000004001BE:  add     rcx, 40h ; '@'
+  00000000004001C2:  ror     qword ptr [rsp], cl
+  00000000004001C6:  pop     rax
+  00000000004001C7:  add     rsp, 8
+  00000000004001CB:  inc     rdi
+  00000000004001CE:  xor     rcx, rcx
+  00000000004001D1:  not     rcx
+  00000000004001D4:  jmp     loc_4000EA
+loc_4001D9:
+  00000000004001D9:  mov     rbx, 123456789ABCDEFh
+  00000000004001E3:  xor     rax, rbx
+  00000000004001E6:  mov     rbx, 1111111111111111h
+  00000000004001F0:  xor     rax, rbx
+  00000000004001F3:  mov     rbx, 0EEEEEEEEEEEEEEEEh
+  00000000004001FD:  xor     rax, rbx
+  0000000000400200:  test    rax, rax
+  0000000000400203:  jnz     short loc_400226
+  0000000000400205:  mov     rax, 1
+  000000000040020C:  mov     rdi, 1
+  0000000000400213:  lea     rsi, loc_40025E
+  000000000040021B:  mov     rdx, 28h ; '('
+  0000000000400222:  syscall; LINUX - sys_write
+                          ; LINUX - sys_write
+  0000000000400224:  jmp     short loc_400245
+loc_400226:
+  0000000000400226:  mov     rax, 1
+  000000000040022D:  mov     rdi, 1
+  0000000000400234:  lea     rsi, ds:400287h
+  000000000040023C:  mov     rdx, 0Fh
+  0000000000400243:  syscall; LINUX - sys_write
+                          ; LINUX - sys_write
+loc_400245:
+  0000000000400245:  mov     rax, 3Ch ; '<'
+  000000000040024C:  syscall; LINUX - sys_exit
+                          ; LINUX - sys_exit
+loc_40024E:
+  000000000040024E:  outs    dx, byte ptr gs:[rsi]
+  0000000000400250:  jz      short near ptr byte_4002B7
+  0000000000400252:  jb      short loc_400274
+  0000000000400254:  jo      short near ptr byte_4002B7
+  0000000000400256:  jnb     short near ptr 4002CBh
+  0000000000400258:  ja      short near ptr 4002C9h
+  000000000040025A:  jb      short near ptr 4002C0h
+  000000000040025C:  or      al, [rax]
+loc_40025E:
+  000000000040025E:  outs    dx, dword ptr [esi]
+  0000000000400260:  outsd
+  0000000000400261:  and     fs:[rdx+6Fh], ch
+  0000000000400265:  db 62h, 2Ch, 20h
+  0000000000400268:  dq 65746164696C6176h
+  0000000000400270:  db 20h, 77h, 69h, 74h
+loc_400274:
+  0000000000400274:  push    4F4D4320h
+  0000000000400279:  jnp     short near ptr 4002F4h
+  000000000040027B:  outsd
+  000000000040027C:  jnz     short near ptr 4002F0h
+  000000000040027E:  pop     rdi
+  000000000040027F:  imul    ebp, [rsi+70h], 0A7D7475h
+  0000000000400286:  add     [rdi+72h], dh
+  0000000000400289:  outsd
+  000000000040028A:  outsb
+  000000000040028B:  and     [eax+61h], dh
+  000000000040028F:  jnb     short near ptr 400304h
+  0000000000400291:  ja      short near ptr 400302h
+  0000000000400293:  jb      short near ptr 4002F9h
+  0000000000400295:  or      al, [rax]
+byte_400297:
+  0000000000400297:  db 0
+  0000000000400298:  dq 3 dup(0)
+  00000000004002B0:  db 7 dup(0)
+byte_4002B7:
+  00000000004002B7:  db 0
+  00000000004002B8:  db 5 dup(0)
+
+[callgraph]
+
