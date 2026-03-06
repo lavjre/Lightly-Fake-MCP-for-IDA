@@ -1,4 +1,4 @@
-# Lightly-Fake-MCP-for-IDA
+# Dimper-for-Disassembler
 
 Headless binary analysis runner that produces structured text dumps from **IDA Pro** or **Ghidra** — with both outputs using the same section layout so downstream tooling (LLM prompts, grep, parsers) works identically regardless of which disassembler generated the file.
 
